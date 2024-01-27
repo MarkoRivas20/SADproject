@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name');
+            $table->string('document')->unique();
+            $table->string('register')->unique();
+            $table->boolean('status')->default(true);
         });
     }
 

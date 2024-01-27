@@ -14,6 +14,11 @@ return new class extends Migration
         Schema::create('cdps', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('number')->unique();
+            $table->boolean('status');
+
+            $table->unsignedBigInteger('partner_id');
+            $table->foreign('partner_id')->references('id')->on('partners');
         });
     }
 
