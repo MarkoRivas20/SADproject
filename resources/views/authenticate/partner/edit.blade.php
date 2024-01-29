@@ -35,7 +35,10 @@
                     @enderror
                 </div>
 
-                {!! Form::submit('Actualizar socio', ['class' => 'btn btn-primary']) !!}
+                @can('authenticate.partner.update')
+                    
+                    {!! Form::submit('Actualizar socio', ['class' => 'btn btn-primary']) !!}
+                @endcan
 
             {!! Form::close() !!}
         </div>

@@ -26,8 +26,23 @@
                         <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
-                
+
+                <h3>Listado de Roles</h3>
+                @foreach ($roles as $role)
+                <div>
+                    <label>
+                        {!! Form::checkbox('roles[]',$role->id,null,['class'=>'mr-1']) !!}
+                        {{$role->name}}
+                    </label>
+                </div>
+                    
+                @endforeach
+
+                @can('authenticate.user.update')
+                    
                 {!! Form::submit('Actualizar usuario', ['class' => 'btn btn-primary']) !!}
+                @endcan
+                
 
             {!! Form::close() !!}
         </div>

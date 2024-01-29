@@ -43,9 +43,11 @@
                     @enderror
                 </div>
 
-                
-
+                @can('authenticate.user.store')
+                    
                 {!! Form::submit('Añadir usuario', ['class' => 'btn btn-primary']) !!}
+                @endcan
+
 
             {!! Form::close() !!}
         </div>

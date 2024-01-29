@@ -35,7 +35,10 @@
                     @enderror
                 </div>
 
+                @can('authenticate.partner.store')
+                    
                 {!! Form::submit('Añadir socio', ['class' => 'btn btn-primary']) !!}
+                @endcan
 
             {!! Form::close() !!}
         </div>

@@ -8,9 +8,21 @@ use Illuminate\Validation\Rules\Password;
 use Laravel\Jetstream\Jetstream;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:authenticate.user.index')->only('index');
+        $this->middleware('can:authenticate.user.create')->only('create');
+        $this->middleware('can:authenticate.user.store')->only('store');
+        $this->middleware('can:authenticate.user.edit')->only('edit');
+        $this->middleware('can:authenticate.user.update')->only('update');
+        $this->middleware('can:authenticate.user.disable')->only('disable');
+        $this->middleware('can:authenticate.user.setpass')->only('setpass');
+        
+    }
     /**
      * Display a listing of the resource.
      */
@@ -54,21 +66,14 @@ class UserController extends Controller
     {
         return ['required', 'string', Password::default(), 'confirmed'];
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        return view('authenticate.user.show', compact('user'));
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(User $user)
     {
-        return view('authenticate.user.edit', compact('user'));
+        $roles = Role::all();
+        return view('authenticate.user.edit', compact('user','roles'));
     }
 
     /**
@@ -80,7 +85,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', "unique:users,email,$user->id"],
         ]);
-
+        $user->roles()->sync($request->roles);
         $user->update($request->all());
 
         return redirect()->route('authenticate.user.index')->with('info','El usuario se actualizó con éxito');
@@ -98,6 +103,11 @@ class UserController extends Controller
         $user->update();
 
         return redirect()->route('authenticate.user.index')->with('info','Se reestablecio la contraseña del usuario con éxito');
+    }
+
+    public function profile()
+    {
+        return view('authenticate.user.profile');
     }
 
     /**

@@ -21,10 +21,15 @@
                         <td>{{$partner->name}}</td>
                         <td>{{$partner->document}}</td>
                         <td width="10px">
+                            @can('authenticate.partner.edit')
                             <a class="btn btn-warning btn-sm" href="{{route('authenticate.partner.edit', $partner)}}">Editar</a>
+                                
+                            @endcan
                         </td>
                         <td width="10px">
+                            @can('authenticate.partner.disable')
                             <a class="btn btn-danger btn-sm" href="{{route('authenticate.partner.disable', $partner)}}">Eliminar</a>
+                            @endcan
                             
                         </td>
                     </tr>

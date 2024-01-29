@@ -259,7 +259,7 @@ return [
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => '/user/profile',
+    'profile_url' => '/auth/profile',
 
     /*
     |--------------------------------------------------------------------------
@@ -295,20 +295,24 @@ return [
             'text' => 'usuarios',
             'route'  => 'authenticate.user.index',
             'icon' => 'fas fa-fw fa-user',
-            'active' => ['auth/user*']
+            'active' => ['auth/user*'],
+            'can' => 'authenticate.user.index'
         ],
         [
             'text' => 'roles',
-            'url'  => 'admin/settings',
+            'route'  => 'authenticate.role.index',
             'icon' => 'fas fa-user-tag',
-            'active' => ['auth/role*']
+            'active' => ['auth/role*'],
+            'can' => 'authenticate.role.index'
+            
         ],
         ['header' => 'labels'],
         [
             'text' => 'Socios',
             'route'  => 'authenticate.partner.index',
             'icon' => 'fas fa-users',
-            'active' => ['auth/partner*']
+            'active' => ['auth/partner*'],
+            'can' => 'authenticate.partner.index'
         ],
         [
             'text' => 'Creditos',

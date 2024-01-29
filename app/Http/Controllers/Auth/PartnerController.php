@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class PartnerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:authenticate.partner.index')->only('index');
+        $this->middleware('can:authenticate.partner.create')->only('create');
+        $this->middleware('can:authenticate.partner.store')->only('store');
+        $this->middleware('can:authenticate.partner.edit')->only('edit');
+        $this->middleware('can:authenticate.partner.update')->only('update');
+        $this->middleware('can:authenticate.partner.disable')->only('disable');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -44,14 +53,6 @@ class PartnerController extends Controller
         ]);
 
         return redirect()->route('authenticate.partner.index')->with('info','El socio se creó con éxito');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Partner $partner)
-    {
-        return view('authenticate.partner.show', compact('partner'));
     }
 
     /**
