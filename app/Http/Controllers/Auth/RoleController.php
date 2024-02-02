@@ -9,6 +9,15 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:authenticate.role.index')->only('index');
+        $this->middleware('can:authenticate.role.create')->only('create');
+        $this->middleware('can:authenticate.role.store')->only('store');
+        $this->middleware('can:authenticate.role.edit')->only('edit');
+        $this->middleware('can:authenticate.role.update')->only('update');
+        $this->middleware('can:authenticate.role.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -71,6 +80,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+
+        return redirect()->route('authenticate.role.index')->with('info','El rol se eliminó con éxito');
     }
 }

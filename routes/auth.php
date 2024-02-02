@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\CdpController;
+use App\Http\Controllers\Auth\CreditController;
 use App\Http\Controllers\Auth\HomeController;
 use App\Http\Controllers\Auth\PartnerController;
 use App\Http\Controllers\Auth\RoleController;
@@ -17,3 +19,9 @@ Route::get('user/{user}/disable', [UserController::class,'disable'])->name('auth
 Route::get('user/{user}/setpass', [UserController::class,'setpass'])->name('authenticate.user.setpass');
 Route::resource('user', UserController::class)->except('show')->names('authenticate.user');
 Route::get('profile', [UserController::class,'profile'])->name('authenticate.user.profile');
+
+Route::get('credit/{credit}/disable', [CreditController::class,'disable'])->name('authenticate.credit.disable');
+Route::resource('credit', CreditController::class)->except('show','store','update','destroy')->names('authenticate.credit');
+
+Route::get('cdp/{cdp}/disable', [CdpController::class,'disable'])->name('authenticate.cdp.disable');
+Route::resource('cdp', CdpController::class)->except('show','store','update','destroy')->names('authenticate.cdp');

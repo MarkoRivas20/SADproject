@@ -27,10 +27,11 @@
                         {{$permission->description}}
                     </label>
                 </div>
-
+                @endforeach
+                    
                 @can('authenticate.role.store')
                     
-                {!! Form::submit('Añadir rol', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit('Añadir rol', ['class' => 'btn btn-primary']) !!}
                 @endcan
 
 

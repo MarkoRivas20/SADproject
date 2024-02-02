@@ -77,5 +77,84 @@ class RoleSeeder extends Seeder
                 'description' => 'Setear contraseña Usuario'
             ])->syncRoles($roleAdmin);
 
+
+        Permission::create([
+                'name' => 'authenticate.role.index',
+                'description' => 'Ver Roles'
+            ])->syncRoles($roleAdmin);
+        Permission::create([
+                'name' => 'authenticate.role.create',
+                'description' => 'Agregar Rol'
+            ])->syncRoles($roleAdmin);
+        Permission::create([
+                'name' => 'authenticate.role.store',
+                'description' => 'Almacenar Rol'
+            ])->syncRoles($roleAdmin);
+        Permission::create([
+                'name' => 'authenticate.role.edit',
+                'description' => 'Editar Rol'
+            ])->syncRoles($roleAdmin);
+        Permission::create([
+                'name' => 'authenticate.role.update',
+                'description' => 'Actualizar Rol'
+            ])->syncRoles($roleAdmin);
+        Permission::create([
+                'name' => 'authenticate.role.destroy',
+                'description' => 'Eliminar Rol'
+            ])->syncRoles($roleAdmin);
+        
+        
+        Permission::create([
+                'name' => 'authenticate.credit.index',
+                'description' => 'Ver Creditos'
+            ])->syncRoles([$roleAdmin, $roleSubmanager, $roleAnalist]);
+        Permission::create([
+                'name' => 'authenticate.credit.create',
+                'description' => 'Agregar Credito'
+            ])->syncRoles([$roleAdmin, $roleSubmanager, $roleAnalist]);
+        Permission::create([
+                'name' => 'authenticate.credit.store',
+                'description' => 'Almacenar Credito'
+            ])->syncRoles([$roleAdmin, $roleSubmanager, $roleAnalist]);
+        Permission::create([
+                'name' => 'authenticate.credit.edit',
+                'description' => 'Visualizar Credito'
+            ])->syncRoles([$roleAdmin, $roleSubmanager, $roleAnalist]);
+        Permission::create([
+                'name' => 'authenticate.credit.update',
+                'description' => 'Actualizar Credito'
+            ])->syncRoles([$roleAdmin, $roleSubmanager, $roleAnalist]);
+        Permission::create([
+                'name' => 'authenticate.credit.disable',
+                'description' => 'Eliminar Credito'
+            ])->syncRoles([$roleAdmin, $roleSubmanager]);
+
+        
+        
+        Permission::create([
+                'name' => 'authenticate.cdp.index',
+                'description' => 'Ver Creditos'
+            ])->syncRoles([$roleAdmin, $roleSubmanager, $roleAnalist]);
+        Permission::create([
+                'name' => 'authenticate.cdp.create',
+                'description' => 'Agregar Credito'
+            ])->syncRoles([$roleAdmin, $roleSubmanager, $roleAnalist]);
+        Permission::create([
+                'name' => 'authenticate.cdp.store',
+                'description' => 'Almacenar Credito'
+            ])->syncRoles([$roleAdmin, $roleSubmanager, $roleAnalist]);
+        Permission::create([
+                'name' => 'authenticate.cdp.edit',
+                'description' => 'Visualizar Credito'
+            ])->syncRoles([$roleAdmin, $roleSubmanager, $roleAnalist]);
+        Permission::create([
+                'name' => 'authenticate.cdp.update',
+                'description' => 'Actualizar Credito'
+            ])->syncRoles([$roleAdmin, $roleSubmanager, $roleAnalist]);
+        Permission::create([
+                'name' => 'authenticate.cdp.disable',
+                'description' => 'Eliminar Credito'
+            ])->syncRoles([$roleAdmin, $roleSubmanager]);
+        
     }
 }

@@ -26,7 +26,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Rol</th>
-                        <th></th>
+                        <th colspan="2"></th>
                     </tr>
                 </thead>
     
@@ -35,14 +35,22 @@
                         <tr>
                             <td>{{$role->id}}</td>
                             <td>{{$role->name}}</td>
-                            <td width="25%">
+                            <td width="10px">
                                 @can('authenticate.role.edit')
                                     <a class="btn btn-warning btn-sm" href="{{route('authenticate.role.edit', $role)}}">Editar</a>
                                 @endcan
-                                @can('authenticate.role.disable')
-                                    <a class="btn btn-danger btn-sm" href="{{route('authenticate.role.disable', $role)}}">Eliminar</a>
+                            </td>
+                            <td width="10px">
+                                @can('authenticate.role.destroy')
+                                    
+                                    <form action="{{route('authenticate.role.destroy', $role)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                    </form>
                                 @endcan
                             </td>
+
                         </tr>
                     @endforeach
                 </tbody>

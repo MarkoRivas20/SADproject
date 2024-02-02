@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('number')->unique();
-            $table->boolean('status');
+            $table->boolean('status')->default(true);;
 
             $table->unsignedBigInteger('partner_id');
             $table->foreign('partner_id')->references('id')->on('partners');

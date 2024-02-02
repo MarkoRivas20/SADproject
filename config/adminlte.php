@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'auth',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -290,7 +290,10 @@ return [
     */
 
     'menu' => [
-        ['header' => 'account_settings'],
+        [
+            'header' => 'account_settings',
+            'can' => 'authenticate.user.index'
+        ],
         [
             'text' => 'usuarios',
             'route'  => 'authenticate.user.index',
@@ -316,15 +319,17 @@ return [
         ],
         [
             'text' => 'Creditos',
-            'url'  => 'admin/settings',
+            'route'  => 'authenticate.credit.index',
             'icon' => 'fas fa-money-bill-wave',
-            'active' => ['auth/credit*']
+            'active' => ['auth/credit*'],
+            'can' => 'authenticate.credit.index'
         ],
         [
             'text' => 'DPF',
-            'url'  => 'admin/settings',
+            'route'  => 'authenticate.cdp.index',
             'icon' => 'fas fa-file-invoice-dollar',
-            'active' => ['auth/cdp*']
+            'active' => ['auth/cdp*'],
+            'can' => 'authenticate.cdp.index'
         ],
     ],
 
