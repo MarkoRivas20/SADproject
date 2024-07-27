@@ -64,4 +64,14 @@ class User extends Authenticatable
     public function audits(){
         return $this->hasMany(Audit::class);
     }
+
+    public function documentsUser(){
+        return $this->hasMany(Document::class);
+    }
+    
+    public function documents(){
+        return $this->belongsToMany(Document::class);
+    }
+
+
 }

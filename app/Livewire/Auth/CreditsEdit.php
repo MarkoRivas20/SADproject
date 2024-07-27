@@ -3,9 +3,13 @@
 namespace App\Livewire\Auth;
 
 use App\Models\Credit;
+use App\Models\File;
 use App\Models\Partner;
 use Livewire\Component;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
+
 
 use function Laravel\Prompts\select;
 
@@ -16,8 +20,9 @@ class CreditsEdit extends Component
     public $search;
     public $partner;
     public $show;
-    public $showError = false;
+    public $showMessage = false;
     public $validator;
+    public $files = [];
 
     public function mount(){
         $this->number = $this->credit->number;
@@ -72,8 +77,21 @@ class CreditsEdit extends Component
         ]);
 
         return redirect()->route('authenticate.credit.index')->with('info','El crédito se actualizó con éxito');
+ 
+    }
 
-        
+    public function disable(File $file){
+
+        $file->status=false;
+        $file->update();
+
+        $file->audit()->create([
+            'user_id' => auth()->id(),
+            'process' => "DELETE"
+        ]);
+
+        $this->showMessage = true;
+
     }
 
     public function render()

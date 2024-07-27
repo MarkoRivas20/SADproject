@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Cdp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CdpController extends Controller
 {
@@ -54,5 +55,33 @@ class CdpController extends Controller
         ]);
 
         return redirect()->route('authenticate.cdp.index')->with('info','El CDP se eliminó con éxito');
+    }
+
+    public function upload(Cdp $cdp, Request $request){
+        
+        $request->validate([
+            'stock_file'=>"required",
+            'stock_file.*'=>"required|file|mimes:jpeg,png,jpg,pdf,doc,docx,xls,xlsx",
+        ],[
+            'required' => 'El campo es obligatorio.',
+            'mimes' => 'Deben ser solo archivos con formato: jpeg, png, jpg, pdf, doc, docx, xls, xlsx.'
+        ]);
+
+        foreach ($request->file('stock_file') as $file) {
+            
+            $url = Storage::put('/documents', $file);
+
+            $file = $cdp->file()->create([
+                'name' => $file->getClientOriginalName(),
+                'url' => $url
+            ]);
+
+            $file->audit()->create([
+                'user_id' => auth()->id(),
+                'process' => "CREATE"
+            ]);
+            
+        }
+        return redirect()->route('authenticate.cdp.edit', $cdp)->with('info','los documentos se agregaron con éxito');
     }
 }

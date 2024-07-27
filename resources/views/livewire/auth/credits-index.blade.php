@@ -1,4 +1,7 @@
 <div class="card">
+    <div class="card-header">
+        <input wire:model.live="search" class="form-control" placeholder="Ingrese el número de crédito">
+    </div>
     <div class="card-body">
         <table class="table table-stripped">
             <thead>

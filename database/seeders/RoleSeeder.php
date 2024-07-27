@@ -155,6 +155,46 @@ class RoleSeeder extends Seeder
                 'name' => 'authenticate.cdp.disable',
                 'description' => 'Eliminar Credito'
             ])->syncRoles([$roleAdmin, $roleSubmanager]);
+
+        Permission::create([
+            'name' => 'authenticate.document.index',
+            'description' => 'Ver Otros Documentos'
+        ])->syncRoles([$roleAdmin, $roleSubmanager, $roleAnalist]);
+
+        Permission::create([
+            'name' => 'authenticate.mydocument.index',
+            'description' => 'Ver Mis Documentos'
+        ])->syncRoles([$roleAdmin, $roleSubmanager, $roleAnalist]);
+
+        Permission::create([
+            'name' => 'authenticate.mydocument.create',
+            'description' => 'Agregar Documento'
+        ])->syncRoles([$roleAdmin, $roleSubmanager]);
+
+        Permission::create([
+            'name' => 'authenticate.mydocument.edit',
+            'description' => 'Editar Documento'
+        ])->syncRoles([$roleAdmin, $roleSubmanager]);
+
+        Permission::create([
+            'name' => 'authenticate.mydocument.update',
+            'description' => 'Actualizar Documento'
+        ])->syncRoles([$roleAdmin, $roleSubmanager]);
+
+        Permission::create([
+            'name' => 'authenticate.mydocument.store',
+            'description' => 'Almacenar Documento'
+        ])->syncRoles([$roleAdmin, $roleSubmanager]);
+
+        Permission::create([
+            'name' => 'authenticate.mydocument.disable',
+            'description' => 'Eliminar Documento'
+        ])->syncRoles([$roleAdmin, $roleSubmanager]);
+
+        Permission::create([
+            'name' => 'authenticate.others',
+            'description' => 'Ver label Otros'
+        ])->syncRoles([$roleAdmin, $roleSubmanager]);
         
     }
 }

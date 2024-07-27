@@ -64,8 +64,8 @@ return [
     */
 
     'logo' => '<b>SAD Cuajone</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img' => 'vendor/adminlte/dist/img/logocoopac.png',
+    'logo_img_class' => 'brand-image img-circle elevation-2',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Admin Logo',
@@ -109,7 +109,7 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/logocoopac.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -192,7 +192,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-light-primary elevation-2',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -255,7 +255,7 @@ return [
     'use_route_url' => false,
     'dashboard_url' => 'auth',
     'logout_url' => 'logout',
-    'login_url' => 'login',
+    'login_url' => '',
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
@@ -295,21 +295,50 @@ return [
             'can' => 'authenticate.user.index'
         ],
         [
-            'text' => 'usuarios',
+            'text' => 'Usuarios',
             'route'  => 'authenticate.user.index',
             'icon' => 'fas fa-fw fa-user',
             'active' => ['auth/user*'],
             'can' => 'authenticate.user.index'
         ],
         [
-            'text' => 'roles',
+            'text' => 'Roles',
             'route'  => 'authenticate.role.index',
             'icon' => 'fas fa-user-tag',
             'active' => ['auth/role*'],
             'can' => 'authenticate.role.index'
             
         ],
-        ['header' => 'labels'],
+        [
+            'header' => 'documents',
+            'can' => 'authenticate.document.index'
+        ],
+        [
+            'text' => 'Documentos',
+            'icon' => 'fas fa-book',
+            'active' => ['auth/document*'],
+            'can' => 'authenticate.document.index',
+            'submenu' => [
+                [
+                    'text' => 'Mis Documentos',
+                    'route'  => 'authenticate.mydocument.index',
+                    'icon' => 'fas fa-book',
+                    'active' => ['auth/mydocument*'],
+                    'can' => 'authenticate.mydocument.index'
+                ],
+                [
+                    'text' => 'Otros Documentos',
+                    'route'  => 'authenticate.document.index',
+                    'icon' => 'fas fa-book',
+                    'active' => ['auth/document*'],
+                    'can' => 'authenticate.document.index'
+                ]
+            ], 
+        ],
+        [
+            'header' => 'others',
+            'can' => 'authenticate.others'
+        ],
         [
             'text' => 'Socios',
             'route'  => 'authenticate.partner.index',

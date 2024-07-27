@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Credit;
 use App\Models\Partner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CreditController extends Controller
 {
@@ -55,6 +56,34 @@ class CreditController extends Controller
         ]);
 
         return redirect()->route('authenticate.credit.index')->with('info','El crédito se eliminó con éxito');
+    }
+
+    public function upload(Credit $credit, Request $request){
+        
+        $request->validate([
+            'stock_file'=>"required",
+            'stock_file.*'=>"required|file|mimes:jpeg,png,jpg,pdf,doc,docx,xls,xlsx",
+        ],[
+            'required' => 'El campo es obligatorio.',
+            'mimes' => 'Deben ser solo archivos con formato: jpeg, png, jpg, pdf, doc, docx, xls, xlsx.'
+        ]);
+
+        foreach ($request->file('stock_file') as $file) {
+            
+            $url = Storage::put('/documents', $file);
+
+            $file = $credit->file()->create([
+                'name' => $file->getClientOriginalName(),
+                'url' => $url
+            ]);
+
+            $file->audit()->create([
+                'user_id' => auth()->id(),
+                'process' => "CREATE"
+            ]);
+            
+        }
+        return redirect()->route('authenticate.credit.edit', $credit)->with('info','los documentos se agregaron con éxito');
     }
 
 }

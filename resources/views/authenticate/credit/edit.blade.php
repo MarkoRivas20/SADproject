@@ -13,6 +13,6 @@
 @stop
 
 @section('js')
-    
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
 @stop
